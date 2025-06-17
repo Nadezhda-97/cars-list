@@ -27,12 +27,12 @@ const Content = async ({ searchParams }: ContentProps) => {
       {/* Сетка карточек */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         {cars.map((car) => (
-          <CarCard key={car.id} car={car} />
+          <CarCard key={car.unique_id} car={car} />
         ))}
       </div>
 
       {/* Пагинация */}
-      <Pagination currentPage={meta.page} totalPages={meta.totalPages} />
+      <Pagination currentPage={meta.page} totalPages={meta.last_page} />
     </div>
   );
 };
