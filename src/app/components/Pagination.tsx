@@ -1,5 +1,6 @@
 import Link from "next/link";
 import getPageNumbers from "../utils/getPageNumbers";
+import buildQueryString from "../utils/buildQueryString";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
 interface PaginationProps {
@@ -7,18 +8,17 @@ interface PaginationProps {
   totalPages: number;
   sort?: string;
   order?: string;
+  limit?: string;
 }
 
-const Pagination = ({ currentPage, totalPages, sort, order }: PaginationProps) => {
-  //const createPageLink = (page: number) => `/?page=${page}`;
+const Pagination = ({ currentPage, totalPages, sort, order, limit }: PaginationProps) => {
   const createPageLink = (page: number) => {
-    const params = new URLSearchParams();
-    params.set("page", page.toString());
-
-    if (sort) params.set("_sort", sort);
-    if (order) params.set("_order", order);
-
-    return `/?${params.toString()}`;
+    return buildQueryString({
+      limit,
+      page: page.toString(),
+      sort,
+      order,
+    });
   };
 
   const hasPrev = currentPage > 1;
@@ -26,7 +26,6 @@ const Pagination = ({ currentPage, totalPages, sort, order }: PaginationProps) =
 
   const pageNumbers = getPageNumbers(currentPage, totalPages);
 
-  // ??? Скрываем пагинацию, если всего одна страница
   if (totalPages <= 1) return null;
 
   return (
