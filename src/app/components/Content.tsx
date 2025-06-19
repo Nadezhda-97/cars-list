@@ -26,17 +26,12 @@ const Content = async ({ searchParams }: ContentProps) => {
 
   return (
     <div className="space-y-8">
-      {/* Сортировка */}
       <SortSelect currentOrder={order} />
-      
-      {/* Сетка карточек */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {cars.map((car) => (
           <CarCard key={car.unique_id} car={car} />
         ))}
       </div>
-
-      {/* Пагинация */}
       <Pagination currentPage={meta.page} totalPages={meta.last_page} sort={sort} order={order} />
     </div>
   );
