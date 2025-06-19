@@ -9,14 +9,15 @@ interface ContentProps {
 }
 
 const Content = async ({ searchParams }: ContentProps) => {
-  const currentPage = Number(searchParams.page) || 1;
+  const currentPage = Number(searchParams._page) || 1;
 
+  const limit = searchParams._limit || "12";
   const sort = searchParams._sort;
   const order = searchParams._order;
 
   let carsData: CarsResponse;
   try {
-    carsData = await fetchCars(currentPage, sort, order);
+    carsData = await fetchCars(currentPage, sort, order, limit); 
   } catch (error) {
     console.error(error);
     return <p className="text-red-500">Ошибка при загрузке данных</p>;
@@ -32,7 +33,11 @@ const Content = async ({ searchParams }: ContentProps) => {
           <CarCard key={car.unique_id} car={car} />
         ))}
       </div>
-      <Pagination currentPage={meta.page} totalPages={meta.last_page} sort={sort} order={order} />
+      <Pagination
+        currentPage={meta.page}
+        totalPages={meta.last_page}
+        sort={sort} order={order}
+        limit={limit} />
     </div>
   );
 };
