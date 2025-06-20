@@ -1,4 +1,4 @@
-import Image from "next/image";
+import ImageSlider from "./ImageSlider";
 import { Car } from "../types/car";
 import { Heart, Zap, Palette, Calendar, Fuel, Settings } from "lucide-react";
 
@@ -9,15 +9,12 @@ const CarCard = ({ car }: CarCardProps) => {
   return (
     <div className="relative border rounded-2xl shadow-md bg-white overflow-hidden transition hover:shadow-xl hover:scale-[1.01] duration-300 w-full">
       <div className="relative">
-        <Image
-          src={car.images.image[0]}
+        <ImageSlider
+          images={car.images.image}
           alt={`${car.mark_id} ${car.folder_id}`}
-          width={400}
-          height={192}
-          className="w-full h-48 object-cover sm:h-52 md:h-56"
         />
         <button
-          className="absolute top-2 right-2 bg-white/80 hover:bg-white p-1.5 rounded-full shadow transition"
+          className="absolute top-2 right-2 z-10 bg-white/80 hover:bg-white p-1.5 rounded-full shadow transition"
           aria-label="Добавить в избранное"
         >
           <Heart className="w-5 h-5 text-red-500" />
