@@ -14,7 +14,7 @@ const fetchCars = async (
     order,
   });
 
-  const response = await fetch(`https://plex-parser.ru-rating.ru/cars${params}`);
+  const response = await fetch(`/api/cars${params}`);
   if (!response.ok) throw new Error("Failed to fetch cars");
   return response.json();
 };
