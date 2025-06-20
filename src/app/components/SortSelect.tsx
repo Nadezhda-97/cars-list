@@ -21,7 +21,7 @@ const SortSelect = ({ currentOrder = "" }: SortSelectProps) => {
 
     const queryString = buildQueryString({
       limit: "12",
-      page: "1", // при смене сортировки всегда начинаем с первой страницы
+      page: "1",
       sort,
       order: order || undefined,
     });
