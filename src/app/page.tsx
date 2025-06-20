@@ -1,9 +1,12 @@
+import { Suspense } from "react";
 import Content from "./components/Content";
 
-export default function Home({ searchParams }: { searchParams?: { [key: string]: string } }) {
+export default function Home() {
   return (
     <main className="p-6">
-      <Content searchParams={searchParams || {}} />
+      <Suspense fallback={<p>Загрузка...</p>}>
+        <Content />
+      </Suspense>
     </main>
   );
 }
